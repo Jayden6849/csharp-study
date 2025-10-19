@@ -70,7 +70,9 @@ namespace csharp_study
             int MAX_HP = 100;
             Console.WriteLine($"현재 체력 : {hp} / 최대 체력 : {MAX_HP}");
 
+            string demon = "악마";
             int damageOfDemon = 2;
+            Console.WriteLine($"{demon}에 의해 {damageOfDemon}의 데미지를 입었습니다.");
 
             hp -= damageOfDemon;
             Console.WriteLine($"현재 체력 : {hp} / 최대 체력 : {MAX_HP}");
