@@ -34,10 +34,10 @@ namespace csharp_study
             // 데이터의 형식 =========================================================================
 
             // 1. 값 형식(Value Type)
-            // 정수형 : byte, sbyte, short, ushort, int, uint, long, ulong
-            // 실수형 : float, double, decimal
-            // 논리형 : bool
-            // 문자형 : char
+            // 정수형 : byte(1), sbyte(1), short(2), ushort(2), int(4), uint(4), long(8), ulong(8) (u == unsigned :: 부호가 없는, s == signed :: 부호가 있는)
+            // 실수형 : float(4), double(8), decimal
+            // 논리형 : bool(1)
+            // 문자형 : char(2)
 
             // 2. 참조 형식(Reference Type)
             // 문자열형(string) : "Hello"
@@ -76,6 +76,15 @@ namespace csharp_study
 
             hp -= damageOfDemon;
             Console.WriteLine($"현재 체력 : {hp} / 최대 체력 : {MAX_HP}");
+
+            // 2진법, 8진법, 10진법, 16진법 =========================================================================
+            // ob00, 0b01, 0b10, 0b11 (2진법)
+            // 0o0, 0o1, 0o2, 0o3 (8진법)
+            // 0, 1, 2, 3 (10진법)
+            // 0x0, 0x1, 0x2, 0x3 (16진법) : 2진법을 4자리씩 끊어서 16진법으로 표현할 수 있음
+
+            // 2의 보수법을 채택하고 있기 때문에 signed 형식의 가장 첫번째 비트는 부호 비트로 사용됨
+            // ex. 10000000 (2진법) => -128 (10진법)
 
         }
     }
