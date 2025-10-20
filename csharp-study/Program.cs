@@ -145,12 +145,12 @@ namespace csharp_study
             // 숫자 -> 문자열 : int.Parse(), float.Parse(), double.Parse(), bool.Parse() 등 존재
             // 문자열 -> 숫자 : int.ToString(), float.ToString(), double.ToString(), bool.ToString() 등 존재
 
-            strLevel = (level + 3) + ""; // Java와 완전하게 형변환을 다룰 수 있음(메서드 활용 방식만 다를 뿐)
+            strLevel = (level) + ""; // Java와 완전하게 형변환을 다룰 수 있음(메서드 활용 방식만 다를 뿐)
             Console.WriteLine($"현재 레벨 : {strLevel}");
 
             // 스트링 인터폴레이션 vs 스트링 포맷팅 ===========================================================
 
-            hp = 88;
+            hp = 72;
             MAX_HP = 100;
 
             // 두 가지 방법은 완전히 동일하게 동작함
@@ -160,8 +160,28 @@ namespace csharp_study
             hpNotice = string.Format("당신의 현재 체력은 {0}/{1}입니다.", hp, MAX_HP); // 스트링 포맷팅
             Console.WriteLine(hpNotice);
 
+            // 산술연산 =================================================================
+            // + - * / %
+            // += -= *= /= %=
+            // ++ --
+            
+            // 연산자 우선 순위는 Java와 동일
 
+            // Math.Pow(a, b) : a의 b제곱
+            // Math.Sqrt(a) : a의 제곱근
 
+            // % 는 음수 연산에서만 살짝 주의해주면 됨
+            // 0으로 나누었을 때 예외 발생 (DivideByZeroException, ArithmeticException)
+
+            // 체력 회복 아이템 사용 예시
+            int smallHealthPotion = 20;
+            String samllHealthPotionName = "작은 체력 포션";
+
+            Console.Write($"({samllHealthPotionName}) 사용 : ");
+            hp = (hp + smallHealthPotion) > MAX_HP ? MAX_HP : (hp + smallHealthPotion); // 삼항 연산자
+
+            hpNotice = $"당신의 현재 체력은 {hp}/{MAX_HP}입니다.";
+            Console.WriteLine(hpNotice);
 
         }
     }
