@@ -2,6 +2,13 @@
 {
     class Program
     {
+        enum Choice
+        {
+            Scissors = 0,
+            Rock = 1,
+            Paper = 2
+        }
+
         static void Main(string[] args)
         {
             // =============== 생사 판정 ===============
@@ -86,24 +93,40 @@
 
             Random random = new Random();
 
-            while(true)
-            {
-                int aiChoice = random.Next(0, 3); // 0 ~ 2 중 랜덤값 하나를 반환 (int)
-                
-                Console.Write("가위(0), 바위(1), 보(2) 중 하나를 입력하세요: ");
-                int myChoice = Convert.ToInt32(Console.ReadLine());
+            // 상수 선언 : 가독성을 위해 의미있는 이름을 부여 (대문자 스네이크) + 재할당 방지
+            // C#에서는 const 키워드를 사용 (final 아님에 유의)
+            //const int SCISSORS = 0;
+            //const int ROCK = 1;
+            //const int PAPER = 2;
 
+            // 가위, 바위, 보는 연관된 값이므로 enum으로 선언하는 것이 더 적절
+
+            while (true)
+            {
                 try
                 {
+                    int aiChoice = random.Next(0, 3); // 0 ~ 2 중 랜덤값 하나를 반환 (int)
+
+                    Console.Write("가위(0), 바위(1), 보(2) 중 하나를 입력하세요: ");
+                    string input = Console.ReadLine() ?? "";
+                    int myChoice = -1;
+
+                    // TryParse로 안전하게 변환
+                    if (!int.TryParse(input, out myChoice) || myChoice < 0 || myChoice > 2)
+                    {
+                        Console.WriteLine("잘못된 입력입니다. 0, 1, 2 중 하나를 입력하세요.\n");
+                        continue;
+                    }
+
                     switch (aiChoice)
                     {
-                        case 0:
+                        case (int)Choice.Scissors:
                             Console.WriteLine("AI가 낸 것: 가위");
                             break;
-                        case 1:
+                        case (int)Choice.Rock:
                             Console.WriteLine("AI가 낸 것: 바위");
                             break;
-                        case 2:
+                        case (int)Choice.Paper:
                             Console.WriteLine("AI가 낸 것: 보");
                             break;
                         default:
@@ -112,13 +135,13 @@
 
                     switch (myChoice)
                     {
-                        case 0:
+                        case (int)Choice.Scissors:
                             Console.WriteLine("내가 낸 것: 가위");
                             break;
-                        case 1:
+                        case (int)Choice.Rock:
                             Console.WriteLine("내가 낸 것: 바위");
                             break;
-                        case 2:
+                        case (int)Choice.Paper:
                             Console.WriteLine("내가 낸 것: 보");
                             break;
                         default:
@@ -129,7 +152,7 @@
                     {
                         Console.WriteLine("무승부");
                     }
-                    else if ((aiChoice == 0 && myChoice == 1) || (aiChoice == 1 && myChoice == 2) || (aiChoice == 2 && myChoice == 0))
+                    else if ((aiChoice == (int)Choice.Scissors && myChoice == (int)Choice.Rock) || (aiChoice == (int)Choice.Rock && myChoice == (int)Choice.Paper) || (aiChoice == (int)Choice.Paper && myChoice == (int)Choice.Scissors))
                     {
                         Console.WriteLine("승리");
                         break;
@@ -140,10 +163,20 @@
                         break;
                     }
                 }
-                catch (Exception e)
+                catch (FormatException)
+                {
+                    Console.WriteLine("숫자만 입력 가능합니다!");
+                    continue;
+                }
+                catch (ArgumentException e)
                 {
                     Console.WriteLine(e.Message);
                     continue;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("알 수 없는 오류가 발생했습니다: 프로그램을 종료합니다.");
+                    return;
                 }
             }
 
