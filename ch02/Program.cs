@@ -180,6 +180,54 @@
                 }
             }
 
+            // =============== while, do-while, for ===============
+
+            byte cnt = 0;
+            while (cnt < 5)
+            {
+                cnt++;
+                Console.WriteLine($"반복 횟수: {cnt}회");
+            }
+
+            cnt = 0;
+            do
+            {
+               cnt++;
+               Console.WriteLine($"반복 횟수: {cnt}회");
+            } while (cnt < 5);
+
+            for (int i = 0; i < 5; i++)
+            {
+                Console.WriteLine($"반복 횟수: {i + 1}회");
+            }
+
+            // =============== 거울아거울아 ===============
+
+            string answer;
+
+            do
+            {
+                Console.Write("거울아 거울아, 세상에서 네가 제일 이쁘니? (y/n) ");
+                answer = Console.ReadLine() ?? "";
+            } while (!answer.Equals("y", StringComparison.OrdinalIgnoreCase));
+
+            // =============== 소수의 판별 ===============
+            // 소수 : 1과 자기 자신으로만 나누어 떨어지는 수
+
+            int numberToCheck = 29;
+            bool isPrime = numberToCheck >= 2;
+
+            for (int i = 2; i <= Math.Sqrt(numberToCheck); i++)
+            {
+                if (numberToCheck % i == 0)
+                {
+                    isPrime = false;
+                    break;
+                }
+            }
+
+            Console.WriteLine(isPrime ? "소수입니다." : "소수가 아닙니다.");
+
         }
     }
 }
