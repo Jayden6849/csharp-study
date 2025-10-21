@@ -48,7 +48,7 @@
 
             // =============== 가위바위보 switch ===============
 
-            choice = 34;
+            choice = 2;
 
             try
             {
@@ -72,6 +72,13 @@
                 Console.WriteLine(e.Message);
                 return;
             }
+
+            // =============== 삼항 연산자 ===============
+
+            int number = 25;
+            bool isPair = (number % 2 == 0) ? true : false;
+
+            Console.WriteLine(isPair ? "짝수" : "홀수");
 
         }
     }
