@@ -20,7 +20,20 @@
 
         static void AddOne(ref int number)
         {
-            number = number + 1;
+            number++;
+        }
+
+        static void Swap(ref int a, ref int b)
+        {
+            int temp = a;
+            a = b;
+            b = temp;
+        }
+
+        static void DivideNum(int num1, int num2, out int result1, out int result2)
+        {
+            result1 = num1 / num2;
+            result2 = num1 % num2;
         }
 
         static void Main(string[] args)
@@ -291,9 +304,31 @@
             // 참조에 의한 전달 (Call by Reference) - ref, out 키워드 사용
 
             // 포인터를 쓰지 않고도 ref 키워드를 통해 참조에 의한 전달 가능
+            // * 중요: ref 키워드는 메서드 정의와 호출 시 모두 명시해야 함
             int numC = 0;
             Program.AddOne(ref numC);
             Console.WriteLine(numC);
+
+            // ref 키워드가 있어서 변수의 실제 메모리 주소를 전달할 수 있음 (call by reference)
+            // 즉, 메서드가 밖에 있는 변수의 값을 직접 변경 가능하다는 장점이 존재 (Java의 경우 절대 불가능)
+            // 원래 포인터로 해야 할 일을 ref 키워드로 간단히 처리 가능
+            int num1 = 10;
+            int num2 = 20;
+
+            Program.Swap(ref num1, ref num2);
+            Console.WriteLine($"num1: {num1}, num2: {num2}");
+
+            // out 키워드: ref 키워드와 유사하지만 메서드 내부에서 반드시 값을 할당해야 함
+            // 이것도 역시 call by reference 방식으로 동작
+            // 주로 메서드에서 여러 개의 값을 반환하고자 할 때 사용 (Java에서는 배열, 클래스, 컬렉션 등으로만 여러 개 빼올 수 있음)
+            // 정리: ref는 메서드 호출 전에 초기화가 필요하지만, out은 초기화가 필요 없음
+            int numX = 10;
+            int numY = 3;
+
+            // 숫자 2개를 나누고 몫과 나머지를 각각 result1, result2에 담아 각각 반환 (이게 가능하다고? C#)
+            Program.DivideNum(numX, numY, out int result1, out int result2);
+            Console.WriteLine(result1);
+            Console.WriteLine(result2);
 
             // ==================== 메인 메서드 종료 ====================
         }
