@@ -1,4 +1,7 @@
-﻿namespace ch02
+﻿using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
+
+namespace ch02
 {
     class Program
     {
@@ -13,9 +16,14 @@
             Console.WriteLine("Hello World");
         }
 
-        static int AddNum(int num1, int num2)
+        static int AddNum(int num1, int num2, int num3 = 0)
         {
-            return num1 + num2;
+            return num1 + num2 + num3;
+        }
+
+        static float AddNum(float num1, float num2, float num3 = 0.0f, float num4 = 0.0f, float num5 = 0.0f)
+        {
+            return num1 + num2 + num3 + num4 + num5;
         }
 
         static void AddOne(ref int number)
@@ -329,6 +337,50 @@
             Program.DivideNum(numX, numY, out int result1, out int result2);
             Console.WriteLine(result1);
             Console.WriteLine(result2);
+
+            // ==================== 메서드 오버로딩 ====================
+            // 메서드 오버로딩: 동일한 이름의 메서드를 여러 개 정의하는 것 == 이름의 재사용
+            // 조건: 메서드 이름이 동일하며, 매개변수의 자료형, 개수, 순서 중 적어도 하나는 달라야 함
+            // cf. C#에서는 연산자 오버로딩도 지원 (Java에서는 불가능)
+
+            // Default Parameter: C#에서는 기본 매개변수 값을 지정할 수 있음 (C++에서는 가능 / Java에서는 불가능)
+            // 매개변수가 많아졌을 때 메서드를 정의하기도 쉽고 호출하기도 쉬워짐 (가독성 UP)
+            // 또한 C++ 보다 발전된 기능 제공 (매개변수를 지정해서 호출 가능: named argument)
+
+            int intSum = Program.AddNum(10, 20); // 기본 매개변수 값 (num3 = 0) 사용
+            int intSumWithDefault = Program.AddNum(10, 20, 5); 
+            float floatSum = Program.AddNum(10.5f, 20.3f, num5: 2.0f);
+            Console.WriteLine($"intSum: {intSum}, intSumWithDefault: {intSumWithDefault}, floatSum: {floatSum}");
+
+            // ==================== 응용 ====================
+            for (int i = 2; i <= 9; i++)
+            {
+                for (int j = 1; j <= 9; j++)
+                {
+                    Console.WriteLine($"{i} x {j} = {i * j}");
+                }
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j <= i; j++)
+                {
+                    Console.Write("*");
+                }
+                Console.WriteLine();
+            }
+
+            int ret = Factorial(5);
+            Console.WriteLine($"5! = {ret}");
+
+            // 팩토리얼은 반복문, 재귀문 두 가지 방식으로 구현 가능
+            static int Factorial(int n)
+            {
+                if (n <= 1)
+                    return 1;
+                else
+                    return n * Factorial(n - 1);
+            }
 
             // ==================== 메인 메서드 종료 ====================
         }
