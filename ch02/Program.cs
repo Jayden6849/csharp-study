@@ -8,6 +8,20 @@
             Rock = 1,
             Paper = 2
         }
+        static void HelloWorld()
+        {
+            Console.WriteLine("Hello World");
+        }
+
+        static int AddNum(int num1, int num2)
+        {
+            return num1 + num2;
+        }
+
+        static void AddOne(ref int number)
+        {
+            number = number + 1;
+        }
 
         static void Main(string[] args)
         {
@@ -247,6 +261,39 @@
                 
                 Console.WriteLine($"3으로 나뉘는 숫자 발견 : {i}");
             }
+
+            // =============== 메서드 ===============
+            // 기본적으로 Java와 유사하지만 몇 가지 차이점 존재
+            // C#에서는 메서드가 클래스 내부에 정의되어야 함
+            // 메서드 오버로딩 지원
+            // 접근 제한자: public, protect, private, internal, protected internal, private protected
+            //   - 차이: default 없으며 접근 제한자를 명시하지 않으면 기본적으로 private
+            // static 키워드: 정적 메서드 (인스턴스 생성 없이 호출 가능) == 메모리 공간을 공유하는 클래스 메서드
+            // 반환형: void (반환값 없음), int, string 등 다양한 자료형 가능
+            // 메서드 이름: 대문자로 시작하는 파스칼 케이스 권장
+            //   - 차이: 파스칼케이스 == 클래스, 메서드, 속성, 이벤트, 네임스페이스, enum멤버 등
+            //   - 차이: 카멜케이스 == 지역변수, 매개변수, 멤버변수(필드) 등
+            //   - 차이: 어퍼케이스 == 상수
+            //   - 차이: 스네이크케이스 == C# 내부에서는 사용하지 않음 (파일명, URL, DB 필드명 등 외부 API에만 사용)
+            //   - 차이: 케밥케이스 == C# 내부에서는 사용하지 않음 (파일명, URL, CSS 클래스명, JSON 등 외부 API에만 사용)
+            // 매개변수: 자료형과 변수명으로 구성, 여러 개일 경우 쉼표로 구분
+            // 메서드 본문: 중괄호로 감싸여 있으며, 메서드가 수행할 작업을 정의
+            // 반환문: return 키워드로 반환값 지정 (void 메서드의 경우 생략 가능)
+
+            Program.HelloWorld(); // 메인 메서드 밖에 정의된 static 메서드를 호출
+
+            int numA = 10;
+            int numB = 22;
+            int result = Program.AddNum(numA, numB);
+            Console.WriteLine(result);
+
+            // 복사에 의한 전달 (Call by Value)
+            // 참조에 의한 전달 (Call by Reference) - ref, out 키워드 사용
+
+            // 포인터를 쓰지 않고도 ref 키워드를 통해 참조에 의한 전달 가능
+            int numC = 0;
+            Program.AddOne(ref numC);
+            Console.WriteLine(numC);
 
             // ==================== 메인 메서드 종료 ====================
         }
