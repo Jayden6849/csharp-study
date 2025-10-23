@@ -1,0 +1,15 @@
+﻿<Project>
+  <ItemGroup>
+    <!-- Serilog 관련 패키지 -->
+    <PackageVersion Include="Serilog" Version="4.3.0" />
+    <PackageVersion Include="Serilog.Extensions.Logging" Version="9.0.2" />
+    <PackageVersion Include="Serilog.Sinks.Console" Version="6.0.0" />
+    <PackageVersion Include="Serilog.Sinks.File" Version="7.0.0" />
+
+    <!-- Microsoft.Extensions.Logging -->
+    <PackageVersion Include="Microsoft.Extensions.Logging" Version="9.0.10" />
+
+    <!-- 기타 -->
+    <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
+  </ItemGroup>
+</Project>
