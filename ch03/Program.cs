@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.IO;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Serilog;
 
 namespace ch03
@@ -20,7 +22,6 @@ namespace ch03
             return ret;
         }
 
-
         static void Main(string[] args)
         {
             // 디버깅 및 다음 브레이크 포인트로 이동 : F5
@@ -36,20 +37,21 @@ namespace ch03
             // cf. 코드 탐색 단축키
             // Go to Definition : F12
 
+            // appsettings.json 읽기
+            var config = new ConfigurationBuilder()
+                .SetBasePath(AppContext.BaseDirectory)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
+
             // Serilog 구성
             Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug() // 최소 로그 레벨 설정
-                .WriteTo.Console() // 기존 콘솔 출력
-                .WriteTo.File("logs/myapp.log", // 로그 파일 경로
-                    rollingInterval: RollingInterval.Day, // 하루 단위로 파일 분리
-                    retainedFileCountLimit: 7, // 보관할 파일 개수
-                    outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}") // 로그 형식
+                .ReadFrom.Configuration(config)
                 .CreateLogger();
 
             // ILogger 구현체 생성
             using var loggerFactory = LoggerFactory.Create(builder =>
             {
-                builder.AddSerilog(); // Serilog 등록
+                builder.AddSerilog();
             });
             _logger = loggerFactory.CreateLogger<Program>();
 

@@ -220,6 +220,9 @@ namespace csharp_study
             var autoInt = 10;
             var autoString = "자동 추론 변수";
 
+            Console.WriteLine(autoInt);
+            Console.WriteLine(autoString);
+
             // 반드시 선언과 동시에 초기화가 이루어져야 함 -> 컴파일러가 타입을 추론할 수 있도록
             // 지역 변수로만 사용 가능 (멤버 변수로는 사용 불가)
             // 동적 타이핑(dynamic typing)이 아님에 유의 - 컴파일 타임에 타입이 결정됨
