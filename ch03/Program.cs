@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Serilog;
 
-namespace ch03
+namespace csharp_study
 {
     class Program
     {
